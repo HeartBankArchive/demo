@@ -1,11 +1,30 @@
 //var endpoints = require('./endpoints');
 
-describe("A suite is just a function", function() {
-  var a;
+var Browser = require("zombie");
+Browser.localhost('localhost', 9080);
 
-  it("and so is a spec", function() {
-    a = false;
+var url = "/clients";
+var browser = new Browser();
 
-    expect(a).toBe(true);
-  });
+describe("Testing /clients", function() {
+
+    it("should see the login form", function(next) {
+        browser.visit(url, function(err) {
+            expect(browser.success).toBe(true);
+            expect(browser.query("input[value='Login']")).toBeDefined();
+            next();
+        })
+    });
+
+    it("should be able to login", function(next) {
+        browser
+        .fill('input[name="username"]', "admin")
+        .fill('input[name="passcode"]', "1234")
+        .pressButton('input[value="Login"]', function(res) {
+            expect(browser.success).toBe(true);
+            expect(browser.query("input[value='Login']")).toBeNull();
+            next();
+        });
+    });
+
 });

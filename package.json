@@ -4,8 +4,9 @@
   "description": "HeartBank Boilerplate App",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jasmine tests"
+    "start": "nodemon server.js",
+    "test": "jasmine-node --captureExceptions tests",
+    "prod": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,14 @@
   },
   "homepage": "https://github.com/HeartBank/boilerplate#readme",
   "devDependencies": {
-    "jasmine": "^2.5.3"
+    "jasmine-node": "^1.14.5",
+    "nodemon": "^1.11.0",
+    "zombie": "^5.0.5"
   },
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "multer": "^1.3.0"
   }
 }

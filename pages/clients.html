@@ -4,14 +4,16 @@
 		<title>Clients</title>
 		<meta charset="utf-8">
 		<style>
-
+			input {
+				display:block;
+			}
 		</style>
 	</head>
 	<body>
 		<main>
       <form method="POST" action="/clients">
-        Username: <input type="text" name="username"><br>
-        Passcode: <input type="text" name="passcode"><br>
+        <input placeholder="Username" type="text" name="username">
+        <input placeholder="Passcode" type="text" name="passcode">
         <input type="submit" value="Login">
       </form>
 		</main>
