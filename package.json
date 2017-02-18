@@ -1,0 +1,32 @@
+{
+  "name": "heartbank",
+  "version": "0.0.1",
+  "description": "HeartBank Boilerplate App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jasmine tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeartBank/boilerplate.git"
+  },
+  "keywords": [
+    "heartbank",
+    "boilerplate",
+    "express"
+  ],
+  "author": "Thon Ly",
+  "email": "thonly@heartbank.ceo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HeartBank/boilerplate/issues"
+  },
+  "homepage": "https://github.com/HeartBank/boilerplate#readme",
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  },
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
