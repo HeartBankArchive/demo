@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Users</title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+      <h2>Connected User</h2>
+      <ul>
+        <li>Mobile Number: <%= user.number %></li>
+        <li>Language: <%= user.language %></li>
+        <li>Time Zone: <%= user.timezone %></li>
+        <li>PIN Number: <%= user.pin %></li>
+        <li>Manager's Branch ID: <%= user.branch %></li>
+        <li>Status: <%= user.status %></li>
+      </ul>
+      <h2>Bitcoin Wallet</h2>
+      <ul>
+        <li>Currency: <%= user.currency %></li>
+        <li>Balance: <%= user.wallet.BTC %> (<%= user.wallet.USD %>)</li>
+        <li>Address: <%= user.wallet.address %></li>
+      </ul>
+      <img src="<%= user.wallet.qr %>">
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>

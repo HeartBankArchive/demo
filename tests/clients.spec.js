@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const Browser = require("zombie");
-Browser.localhost('localhost', 9080);
+Browser.localhost(process.env.ADDRESS, process.env.PORT);
 const browser = new Browser();
 
 describe("Testing /clients", () => {
