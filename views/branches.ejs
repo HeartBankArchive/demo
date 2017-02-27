@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Branches</title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+      <a href="/">Home</a>
+      <section>
+        <h2>Family Bank</h2>
+        <ul>
+          <li>Language: <%= branch.language %></li>
+          <li>Time Zone: <%= branch.timezone %></li>
+          <li>Currency: <%= branch.currency %></li>
+          <li>Reserve: <%= branch.reserve %></li>
+          <li>Fund: <%= branch.fund %></li>
+          <li>Savings: <%= branch.savings %></li>
+          <li>Loans: <%= branch.loans %></li>
+          <li>Status: <%= branch.status %></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Customers</h2>
+        <% branch.customers.forEach(customer => { %>
+          <ul>
+            <!--<li>ID: <%= customer.id %></li>-->
+            <li>Role: <%= customer.role %></li>
+            <li>Username: <%= customer.username %></li>
+            <li>Balance: <%= customer.balance %></li>
+            <li>Status: <%= customer.status %></li>
+          </ul>
+        <% }) %>
+      </section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>

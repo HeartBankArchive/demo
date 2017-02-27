@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Customers</title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+      <a href="/">Home</a>
+      <section>
+        <h2>Customer</h2>
+        <ul>
+          <li>Role: <%= customer.role %></li>
+          <li>Username: <%= customer.username %></li>
+          <li>Balance: <%= customer.balance %></li>
+          <li>Status: <%= customer.status %></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Family Banks</h2>
+        <% customer.clients.forEach(client => { %>
+          <ul>
+            <li>Manager: <%= client.manager %></li>
+						<li>Branch ID: <%= client.branch %></li>
+						<li>Customer ID: <%= client.customer %></li>
+						<li>User ID: <%= client.user %></li>
+            <li>Client ID: <%= client.id %></li>
+						<li>Auth Token: <%= client.token %></li>
+						<li>Status: <%= client.status %></li>
+						<li><a href="/clients/switch?client=<%= client.id %>&token=<%= client.token %>&branch=<%= client.branch %>&customer=<%= client.customer %>&user=<%= client.user %>">Switch Bank</a></li>
+          </ul>
+        <% }) %>
+      </section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>

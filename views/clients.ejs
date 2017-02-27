@@ -11,11 +11,41 @@
 	</head>
 	<body>
 		<main>
-      <form method="POST" action="/clients">
-        <input placeholder="Username" type="text" name="username">
-        <input placeholder="Passcode" type="text" name="passcode">
-        <input type="submit" value="Login">
-      </form>
+			<a href="/">Home</a>
+			<section>
+				<h2>HeartBank</h2>
+	      <form method="POST" action="/clients">
+	        <input placeholder="Username" type="text" name="username">
+	        <input placeholder="Passcode" type="text" name="passcode">
+	        <input type="submit" value="Login">
+	      </form>
+			</section>
+			<section>
+				<h2>Connected Customer</h2>
+				<ul>
+					<li>Client ID: <%= cookies.client_id %></li>
+					<li>Auth Token: <%= cookies.auth_token %></li>
+					<li>Branch ID: <%= cookies.branch_id %></li>
+					<li>Customer ID: <%= cookies.customer_id %></li>
+					<li>User ID: <%= cookies.user_id %></li>
+					<li><a href="/clients/refresh">Refresh Token</a></li>
+				</ul>
+			</section>
+			<section>
+				<h2>Authenticated Clients</h2>
+				<% clients.forEach(client => { %>
+					<ul>
+						<li>Client ID: <%= client.id %></li>
+						<li>Auth Token: <%= client.token %></li>
+						<li>Branch ID: <%= client.branch %></li>
+						<li>Customer ID: <%= client.customer %></li>
+						<li>User ID: <%= client.user %></li>
+						<li>Expiration: <%= client.date %> <%= client.time %> (<%= client.datetime %>)</li>
+						<li>Status: <%= client.status %></li>
+						<li><a href="/clients/switch?client=<%= client.id %>&token=<%= client.token %>&branch=<%= client.branch %>&customer=<%= client.customer %>&user=<%= client.user %>">Switch Client</a></li>
+					</ul>
+				<% }) %>
+			</section>
 		</main>
 		<script>
 

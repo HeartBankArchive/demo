@@ -16,6 +16,8 @@ app.set('view engine', 'ejs')
 require('./controllers/index')(app);
 require('./controllers/clients')(heartbank, app, urlencodedParser);
 require('./controllers/users')(heartbank, app);
+require('./controllers/branches')(heartbank, app);
+require('./controllers/customers')(heartbank, app);
 
 const server = app.listen(process.env.PORT, () => {
    const host = server.address().address;
