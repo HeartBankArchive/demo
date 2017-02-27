@@ -1,11 +1,11 @@
 {
-  "name": "heartbank",
-  "version": "0.0.1",
+  "name": "heartbankapp",
+  "version": "0.1.0",
   "description": "HeartBank Boilerplate App",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jasmine-node --captureExceptions tests",
+    "test": "mocha tests",
     "prod": "node server.js"
   },
   "repository": {
@@ -25,14 +25,17 @@
   },
   "homepage": "https://github.com/HeartBank/boilerplate#readme",
   "devDependencies": {
-    "jasmine-node": "^1.14.5",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "zombie": "^5.0.5"
   },
   "dependencies": {
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
     "express": "^4.14.1",
+    "heartbank": "^0.2.0",
     "multer": "^1.3.0"
   },
   "engine": "node 6.9.5"

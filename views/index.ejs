@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>HeartBank&reg;</title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+			<section>
+				<ul>
+					<li>Client ID: <%= cookies.client_id %></li>
+					<li>Auth Token: <%= cookies.auth_token %></li>
+					<li>Branch ID: <%= cookies.branch_id %></li>
+					<li>Customer ID: <%= cookies.customer_id %></li>
+					<li>User ID: <%= cookies.user_id %></li>
+				</ul>
+			</section>
+			<section>
+				<ol>
+      		<li><a href="/clients">Clients</a></li>
+					<li><a href="/users">Users</a></li>
+					<li><a href="/branches">Branches</a></li>
+					<li><a href="/customers">Customers</a></li>
+					<li><a href="/transactions">Transactions</a></li>
+					<li><a href="/recurrences">Recurrences</a></li>
+					<li><a href="/subscriptions">Subscriptions</a></li>
+					<li><a href="/payments">Payments</a></li>
+				</ol>
+			</section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>
