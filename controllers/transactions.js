@@ -1,6 +1,9 @@
-module.exports = (heartbank, app, urlencodedParser) => {
+const fs = require('fs');
+const path = require('path');
 
-    app.get('/transactions', urlencodedParser, (req, res, next) => {
+module.exports = (heartbank, app) => {
+
+    app.get('/transactions', (req, res, next) => {
 
       const branch = heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).get({customer:false, q:req.query.q, fetch:req.query.fetch, page:req.query.page, start:req.query.start, end:req.query.end, filters:{account:req.query.account === 'true', fund:req.query.fund == 'true', reserve:req.query.reserve == 'true'}});
 
@@ -21,7 +24,7 @@ module.exports = (heartbank, app, urlencodedParser) => {
 
     });
 
-    app.post('/transactions/transaction', urlencodedParser, (req, res, next) => {
+    app.post('/transactions/transaction', (req, res, next) => {
       heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({command:req.body.command, to:req.body.to, amount:req.body.amount, currency:req.body.currency, anonymity:req.body.anonymity, description:req.body.description, media:req.body.media})
       .then(data => {
         if (data.code === 200) {
@@ -36,11 +39,12 @@ module.exports = (heartbank, app, urlencodedParser) => {
       });
     });
 
-    app.post('/transactions/message', urlencodedParser, (req, res, next) => {
-      heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({message:req.body.message, media:req.body.media})
+    app.post('/transactions/message', (req, res, next) => {
+      heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({message:req.body.message, media:req.file ? fs.readFileSync(path.join(__dirname, '..', req.file.path)) : null})
       .then(data => {
         if (data.code === 200) {
-          console.log(JSON.stringify(data));
+          //console.log(JSON.stringify(data));
+          if (req.file) fs.unlinkSync(path.join(__dirname, '..', req.file.path)); //TODO: why does not work??
           res.redirect('/transactions');
         } else {
           res.send(JSON.stringify(data));

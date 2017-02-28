@@ -1,4 +1,4 @@
-module.exports = (heartbank, app, urlencodedParser) => {
+module.exports = (heartbank, app) => {
 
     const clients = heartbank.clients();
 
@@ -17,7 +17,7 @@ module.exports = (heartbank, app, urlencodedParser) => {
       });
     });
 
-    app.post('/clients', urlencodedParser, (req, res, next) => {
+    app.post('/clients', (req, res, next) => {
       clients.auth(req.body.username, req.body.passcode)
       .then(data => {
         if (data.code === 200) {

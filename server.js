@@ -4,24 +4,25 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 const heartbank = require('heartbank')(process.env.DEVELOPER_KEY, process.env.DEVELOPER_SECRET, process.env.LOCALHOST);
-
 const app = express();
-const urlencodedParser = bodyParser.urlencoded({extended:false});
 
-//app.use(express.static('images'));
+app.use(express.static('images'));
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(multer({dest:'images/'}).single('media'));
 app.use(cookieParser());
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 require('./controllers/index')(app);
-require('./controllers/clients')(heartbank, app, urlencodedParser);
+require('./controllers/clients')(heartbank, app);
 require('./controllers/users')(heartbank, app);
 require('./controllers/branches')(heartbank, app);
 require('./controllers/customers')(heartbank, app);
-require('./controllers/transactions')(heartbank, app, urlencodedParser); //TODO: delete multer??
-//require('./controllers/recurrences')(heartbank, app, urlencodedParser);
-//require('./controllers/subscriptions')(heartbank, app, urlencodedParser);
-//require('./controllers/payments')(heartbank, app, urlencodedParser);
+require('./controllers/transactions')(heartbank, app);
+//require('./controllers/recurrences')(heartbank, app);
+//require('./controllers/subscriptions')(heartbank, app);
+//require('./controllers/payments')(heartbank, app);
 
 const server = app.listen(process.env.PORT, () => {
    const host = server.address().address;

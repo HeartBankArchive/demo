@@ -4,7 +4,9 @@
 		<title>Transactions</title>
 		<meta charset="utf-8">
 		<style>
-
+      input, textarea {
+        display:block;
+      }
 		</style>
 	</head>
 	<body>
@@ -16,7 +18,11 @@
       </section>
       <section>
         <h2>Post Message</h2>
-
+        <form method="POST" action="/transactions/message" enctype = "multipart/form-data">
+	        <textarea placeholder="Transaction Message" name="message"></textarea>
+          <input type="file" name="media" size="1" />
+	        <input type="submit" value="Submit">
+	      </form>
       </section>
       <section>
         <h2>Customer Transactions</h2>
