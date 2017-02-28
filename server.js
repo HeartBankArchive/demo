@@ -18,6 +18,10 @@ require('./controllers/clients')(heartbank, app, urlencodedParser);
 require('./controllers/users')(heartbank, app);
 require('./controllers/branches')(heartbank, app);
 require('./controllers/customers')(heartbank, app);
+require('./controllers/transactions')(heartbank, app, urlencodedParser); //TODO: delete multer??
+//require('./controllers/recurrences')(heartbank, app, urlencodedParser);
+//require('./controllers/subscriptions')(heartbank, app, urlencodedParser);
+//require('./controllers/payments')(heartbank, app, urlencodedParser);
 
 const server = app.listen(process.env.PORT, () => {
    const host = server.address().address;

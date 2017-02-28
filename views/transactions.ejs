@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Transactions</title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<main>
+      <a href="/">Home</a>
+      <section>
+        <h2>Post Transaction</h2>
+
+      </section>
+      <section>
+        <h2>Post Message</h2>
+
+      </section>
+      <section>
+        <h2>Customer Transactions</h2>
+        <% customer.forEach(transaction => { %>
+          <ul>
+            <li>Role: <%= customer.role %></li>
+            <li>Username: <%= customer.username %></li>
+            <li>Balance: <%= customer.balance %></li>
+            <li>Status: <%= customer.status %></li>
+          </ul>
+        <% }) %>
+      </section>
+      <section>
+        <h2>Branch Transactions</h2>
+        <% branch.forEach(transaction => { %>
+          <ul>
+            <li>Role: <%= customer.role %></li>
+            <li>Username: <%= customer.username %></li>
+            <li>Balance: <%= customer.balance %></li>
+            <li>Status: <%= customer.status %></li>
+          </ul>
+        <% }) %>
+      </section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>
