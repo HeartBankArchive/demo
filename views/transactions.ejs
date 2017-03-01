@@ -14,36 +14,92 @@
       <a href="/">Home</a>
       <section>
         <h2>Post Transaction</h2>
-
+        <form method="POST" action="/transactions/transaction" enctype = "multipart/form-data">
+          <select name="command">
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+            <option value="give" selected>Give</option>
+            <option value="take">Take</option>
+            <option value="reward">Reward</option>
+            <option value="donate">Donate</option>
+          </select>
+          <input type="text" name="to" placeholder="To">
+          Anonymity: <input type="checkbox" name="anonymity">
+          <input type="text" name="currency" value="USD">
+          <input type="number" name="amount" placeholder="Amount">
+	        <textarea placeholder="Description" name="description"></textarea>
+          <input type="file" name="media" size="1">
+	        <input type="submit" value="Submit">
+	      </form>
       </section>
       <section>
         <h2>Post Message</h2>
         <form method="POST" action="/transactions/message" enctype = "multipart/form-data">
 	        <textarea placeholder="Transaction Message" name="message"></textarea>
-          <input type="file" name="media" size="1" />
+          <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
 	      </form>
       </section>
       <section>
-        <h2>Customer Transactions</h2>
+        <h2>Search Transactions</h2>
+        <form method="GET" action="/transactions">
+          <input type="text" name="q" placeholder="Text" value="<%= query.q %>">
+          <input type="number" name="fetch" placeholder="Fetch" value="<%= query.fetch %>">
+          <input type="number" name="page" placeholder="Page" value="<%= query.page %>">
+          <input type="date" name="start" placeholder="Start Date" value="<%= query.start %>">
+          <input type="date" name="end" placeholder="End Date" value="<%= query.end %>">
+          Account: <input type="checkbox" name="account" <%= query.account === 'on' ? 'checked' : '' %>>
+          Fund: <input type="checkbox" name="fund" <%= query.fund === 'on' ? 'checked' : '' %>>
+          Reserve: <input type="checkbox" name="reserve" <%= query.reserve === 'on' ? 'checked' : '' %>>
+	        <input type="submit" value="Search">
+	      </form>
+      </section>
+      <section>
+        <h2>Customer</h2>
         <% customer.forEach(transaction => { %>
           <ul>
-            <li>Role: <%= customer.role %></li>
-            <li>Username: <%= customer.username %></li>
-            <li>Balance: <%= customer.balance %></li>
-            <li>Status: <%= customer.status %></li>
+            <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
+            <li>Fund: <%= transaction.bank.fund %></li>
+            <li>Reserve: <%= transaction.bank.reserve %></li>
+            <li>Savings: <%= transaction.bank.savings %></li>
+            <li>Loans: <%= transaction.bank.loans %></li>
+            <li>From: <%= transaction.from.username %></li>
+            <li>Anonymity: <%= transaction.anonymity %></li>
+            <li>Balance: <%= transaction.from.balance %></li>
+            <li>Command: <%= transaction.command %></li>
+            <li>Amount: <%= transaction.amount %> <%= transaction.currency %></li>
           </ul>
+          <% transaction.to.forEach(to => { %>
+            <ul>
+              <li>To: <%= to.prefix %><%= to.username %></li>
+              <li>Balance: <%= to.balance %></li>
+            </ul>
+          <% }) %>
+          <img src="<%= transaction.image %>" height="100">
         <% }) %>
       </section>
       <section>
-        <h2>Branch Transactions</h2>
+        <h2>Branch</h2>
         <% branch.forEach(transaction => { %>
           <ul>
-            <li>Role: <%= customer.role %></li>
-            <li>Username: <%= customer.username %></li>
-            <li>Balance: <%= customer.balance %></li>
-            <li>Status: <%= customer.status %></li>
+            <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
+            <li>Fund: <%= transaction.bank.fund %></li>
+            <li>Reserve: <%= transaction.bank.reserve %></li>
+            <li>Savings: <%= transaction.bank.savings %></li>
+            <li>Loans: <%= transaction.bank.loans %></li>
+            <li>From: <%= transaction.from.username %></li>
+            <li>Anonymity: <%= transaction.anonymity %></li>
+            <li>Balance: <%= transaction.from.balance %></li>
+            <li>Command: <%= transaction.command %></li>
+            <li>Amount: <%= transaction.amount %></li>
           </ul>
+          <% transaction.to.forEach(to => { %>
+            <ul>
+              <li>To: <%= to.prefix %><%= to.username %></li>
+              <li>Balance: <%= to.balance %></li>
+            </ul>
+          <% }) %>
+          <img src="<%= transaction.image %>" height="100">
         <% }) %>
       </section>
 		</main>
