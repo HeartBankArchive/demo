@@ -7,12 +7,12 @@ const browser = new Browser();
 
 describe("Testing /", () => {
 
-    it("should see the home page", next => {
-      browser.visit("/", err => {
-        browser.assert.success();
-        browser.assert.text('title', "HeartBank®");
-        next();
-      });
+  it("should see the home page", next => {
+    browser.visit("/", err => {
+      browser.assert.success();
+      browser.assert.text('title', "HeartBank®");
+      next();
     });
+  });
 
 });

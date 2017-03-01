@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Recurrences</title>
+		<meta charset="utf-8">
+		<style>
+      input, textarea {
+        display:block;
+      }
+      input[type="checkbox"] {
+        display:inline;
+      }
+      img {
+        height:100px;
+        display:block;
+      }
+		</style>
+	</head>
+	<body>
+		<main>
+      <a href="/">Home</a>
+      <section>
+        <h2>Post Transaction: <%= query.id %></h2>
+        <form method="POST" action="/recurrences/transaction" enctype = "multipart/form-data">
+          <select name="command">
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+            <option value="give" selected>Give</option>
+            <option value="take">Take</option>
+            <option value="reward">Reward</option>
+            <option value="donate">Donate</option>
+          </select>
+          <input type="text" name="to" placeholder="To">
+          Anonymity: <input type="checkbox" name="anonymity">
+          <input type="text" name="currency" value="USD">
+          <input type="number" name="amount" placeholder="Amount">
+	        <textarea placeholder="Description" name="description"></textarea>
+          <input type="file" name="media" size="1">
+          <% if (query.image) { %>
+            <img src="<%= query.image %>">
+            Remove: <input type="checkbox" name="remove">
+          <% } %>
+	        <input type="submit" value="Submit">
+	      </form>
+      </section>
+      <section>
+        <h2>Post Message: <%= query.id %></h2>
+        <form method="POST" action="/recurrences/message" enctype = "multipart/form-data">
+	        <textarea placeholder="Transaction Message" name="message"></textarea>
+          <input type="file" name="media" size="1">
+          <% if (query.image) { %>
+            <img src="<%= query.image %>">
+            Remove: <input type="checkbox" name="remove">
+          <% } %>
+	        <input type="submit" value="Submit">
+	      </form>
+      </section>
+      <section>
+        <h2>Recurrences</h2>
+        <% recurrences.forEach(recurrence => { %>
+          <ul>
+            <li>ID: <%= recurrence.id %></li>
+            <li><%= recurrence.cycle %> @ <%= recurrence.date %> <%= recurrence.time %> (<%= recurrence.timezone %>)</li>
+            <li>Command: <%= recurrence.command %></li>
+            <li><a href="/recurrences?id=<%= recurrence.id %>&cycle=<%= recurrence.cycle %>&date=<%= recurrence.date %>&time=<%= recurrence.time %>&command=<%= recurrence.command %>&image=<%= recurrence.image %>">Edit</a></li>
+            <li><a href="/recurrences/<%= recurrence.id %>">Delete</a></li>
+          </ul>
+          <img src="<%= recurrence.image %>">
+        <% }) %>
+      </section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>

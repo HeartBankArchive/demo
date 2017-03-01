@@ -13,12 +13,12 @@ browser.setCookie({name:"user_id", value:process.env.USER_ID});
 
 describe("Testing /branches", () => {
 
-    it("should see the branches page", next => {
-      browser.visit("/branches", err => {
-        browser.assert.success();
-        browser.assert.text('title', "Branches");
-        next();
-      });
+  it("should see the branches page", next => {
+    browser.visit("/branches", err => {
+      browser.assert.success();
+      browser.assert.text('title', "Branches");
+      next();
     });
+  });
 
 });

@@ -1,7 +1,7 @@
 module.exports = app => {
 
-    app.get('/', (req, res) => {
-      res.render('index', {cookies:req.cookies});
-    });
+  app.get('/', (req, res) => {
+    res.render('index', {cookies:req.cookies});
+  });
 
 }

@@ -20,7 +20,7 @@ require('./controllers/users')(heartbank, app);
 require('./controllers/branches')(heartbank, app);
 require('./controllers/customers')(heartbank, app);
 require('./controllers/transactions')(heartbank, app);
-//require('./controllers/recurrences')(heartbank, app);
+require('./controllers/recurrences')(heartbank, app);
 //require('./controllers/subscriptions')(heartbank, app);
 //require('./controllers/payments')(heartbank, app);
 

@@ -13,12 +13,12 @@ browser.setCookie({name:"user_id", value:process.env.USER_ID});
 
 describe("Testing /users", () => {
 
-    it("should see the users page", next => {
-      browser.visit("/users", err => {
-        browser.assert.success();
-        browser.assert.text('title', "Users");
-        next();
-      });
+  it("should see the users page", next => {
+    browser.visit("/users", err => {
+      browser.assert.success();
+      browser.assert.text('title', "Users");
+      next();
     });
+  });
 
 });
