@@ -22,7 +22,7 @@ require('./controllers/customers')(heartbank, app);
 require('./controllers/transactions')(heartbank, app);
 require('./controllers/recurrences')(heartbank, app);
 require('./controllers/subscriptions')(heartbank, app);
-//require('./controllers/payments')(heartbank, app);
+require('./controllers/payments')(heartbank, app);
 
 const server = app.listen(process.env.PORT, () => {
    const host = server.address().address;
