@@ -24,7 +24,7 @@
       <% } %>
       <section>
         <h2>Post via Transaction: <%= query.id %></h2>
-        <form method="POST" action="/recurrences/transaction" enctype = "multipart/form-data">
+        <form method="POST" action="/recurrences/transaction" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= query.id %>">
           <select name="cycle">
             <option value="Daily">Daily</option>
@@ -53,7 +53,7 @@
       </section>
       <section>
         <h2>Post via Message: <%= query.id %></h2>
-        <form method="POST" action="/recurrences/message" enctype = "multipart/form-data">
+        <form method="POST" action="/recurrences/message" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= query.id %>">
           <select name="cycle">
             <option value="Daily">Daily</option>

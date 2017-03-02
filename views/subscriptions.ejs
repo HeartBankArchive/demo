@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Subscriptions</title>
+		<meta charset="utf-8">
+		<style>
+      input {
+        display:block;
+      }
+		</style>
+	</head>
+	<body>
+		<main>
+      <a href="/">Home</a>
+      <section>
+        <h2>Post Subscription</h2>
+        <form method="POST" action="/subscriptions">
+          <input type="hidden" name="id" value="<%= query.id %>">
+          <input type="text" name="webhook" placeholder="Webhook" value="<%= query.webhook %>">
+	        <input type="submit" value="Submit">
+	      </form>
+      </section>
+      <section>
+        <h2>Subscriptions</h2>
+        <% subscriptions.forEach(subscription => { %>
+          <ul>
+            <li>ID: <%= subscription.id %></li>
+            <li><%= subscription.date %> <%= subscription.time %> (<%= subscription.timezone %>)</li>
+            <li>Branch ID: <%= subscription.branch %></li>
+            <li>Customer ID: <%= subscription.customer %></li>
+            <li>User ID: <%= subscription.user %></li>
+            <li>Webhook: <%= subscription.webhook %></li>
+            <li><a href="/subscriptions?id=<%= subscription.id %>&webhook=<%= subscription.webhook %>">Edit</a></li>
+            <li><a href="/subscriptions/<%= subscription.id %>">Delete</a></li>
+          </ul>
+        <% }) %>
+      </section>
+		</main>
+		<script>
+
+    </script>
+	</body>
+</html>

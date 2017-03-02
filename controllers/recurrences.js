@@ -55,7 +55,7 @@ module.exports = (heartbank, app) => {
   });
 
   app.get('/recurrences/:recurrence_id', (req, res, next) => {
-    heartbank.recurrences(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).delete({recurrence_id})
+    heartbank.recurrences(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).delete({recurrence_id:req.params.recurrence_id})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
