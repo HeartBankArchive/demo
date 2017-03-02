@@ -4,7 +4,7 @@
 		<title>Transactions</title>
 		<meta charset="utf-8">
 		<style>
-      input, textarea {
+      select, input, textarea {
         display:block;
       }
       input[type="checkbox"] {
@@ -72,7 +72,7 @@
             <li>From: <%= transaction.from.username %></li>
             <li>Anonymity: <%= transaction.anonymity %></li>
             <li>Balance: <%= transaction.from.balance %></li>
-            <li>Command: <%= transaction.command %></li>
+            <li>Command: <%- transaction.command %></li>
             <li>Amount: <%= transaction.amount %> <%= transaction.currency %></li>
           </ul>
           <% transaction.to.forEach(to => { %>
@@ -96,7 +96,7 @@
             <li>From: <%= transaction.from.username %></li>
             <li>Anonymity: <%= transaction.anonymity %></li>
             <li>Balance: <%= transaction.from.balance %></li>
-            <li>Command: <%= transaction.command %></li>
+            <li>Command: <%- transaction.command %></li>
             <li>Amount: <%= transaction.amount %></li>
           </ul>
           <% transaction.to.forEach(to => { %>
