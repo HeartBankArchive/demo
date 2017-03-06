@@ -36,7 +36,7 @@
             <li><a href="/payments/<%= payment.id %>">Resend Code</a></li>
             <li>
               <form method="POST" action="/payments/<%= payment.id %>">
-                <input type="number" name="code" placeholder="Auth Code">
+                <input type="number" name="code" placeholder="Auth Code" step="0.00000001" min="0">
       	        <input type="submit" value="Process Payment">
       	      </form>
             </li>

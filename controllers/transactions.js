@@ -11,9 +11,11 @@ module.exports = (heartbank, app) => {
 
     Promise.all([branch, customer])
     .then(data => {
-      if (data[0].code === 200 && data[1].code === 200) {
+      if (data[0].code === 200 || data[1].code === 200) {
         //console.log(JSON.stringify(data));
-        res.render('transactions', {query:req.query, branch:data[0].transactions, customer:data[1].transactions});
+        const branches = data[0].code === 200 ? data[0].transactions : [];
+        const customers = data[1].code === 200 ? data[1].transactions : [];
+        res.render('transactions', {query:req.query, branches, customers});
       } else {
         res.send(JSON.stringify(data));
       }

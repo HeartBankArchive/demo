@@ -1,7 +1,7 @@
 "use strict";
 
 require('dotenv').config();
-const heartbank = require('heartbank')(process.env.DEVELOPER_KEY, process.env.DEVELOPER_SECRET, process.env.LOCALHOST);
+const heartbank = require('heartbank')(process.env.DEVELOPER_KEY, process.env.DEVELOPER_SECRET); //, process.env.LOCALHOST
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');

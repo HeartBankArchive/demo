@@ -32,7 +32,7 @@
           <input type="text" name="to" placeholder="To">
           Anonymity: <input type="checkbox" name="anonymity">
           <input type="text" name="currency" value="USD">
-          <input type="number" name="amount" placeholder="Amount">
+          <input type="number" name="amount" placeholder="Amount" step="0.01" min="0">
 	        <textarea placeholder="Description" name="description"></textarea>
           <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
@@ -62,7 +62,7 @@
       </section>
       <section>
         <h2>Customer</h2>
-        <% customer.forEach(transaction => { %>
+        <% customers.forEach(transaction => { %>
           <ul>
             <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
             <li>Fund: <%= transaction.bank.fund %></li>
@@ -81,12 +81,14 @@
               <li>Balance: <%= to.balance %></li>
             </ul>
           <% }) %>
-          <img src="<%= transaction.image %>" height="100">
+					<% if (transaction.image) { %>
+          	<img src="<%= transaction.image %>" height="100">
+					<% } %>
         <% }) %>
       </section>
       <section>
         <h2>Branch</h2>
-        <% branch.forEach(transaction => { %>
+        <% branches.forEach(transaction => { %>
           <ul>
             <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
             <li>Fund: <%= transaction.bank.fund %></li>

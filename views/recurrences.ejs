@@ -27,10 +27,10 @@
         <form method="POST" action="/recurrences/transaction" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= query.id %>">
           <select name="cycle">
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly" selected>Monthly</option>
-            <option value="Yearly">Yearly</option>
+            <option value="Daily" <% if (query.cycle === 'Daily') { %>selected<% } %>>Daily</option>
+            <option value="Weekly" <% if (query.cycle === 'Weekly') { %>selected<% } %>>Weekly</option>
+            <option value="Monthly" <% if (!query.cycle || query.cycle === 'Monthly') { %>selected<% } %>>Monthly</option>
+            <option value="Yearly" <% if (query.cycle === 'Yearly') { %>selected<% } %>>Yearly</option>
           </select>
           <input type="date" name="date" placeholder="Start Date" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(0, 10) : null %>">
           <input type="time" name="time" placeholder="Start Time" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(11, 16) : null %>">
@@ -45,7 +45,7 @@
           <input type="text" name="to" placeholder="To">
           Anonymity: <input type="checkbox" name="anonymity">
           <input type="text" name="currency" value="USD">
-          <input type="number" name="amount" placeholder="Amount">
+          <input type="number" name="amount" placeholder="Amount" step="0.01" min="0">
 	        <textarea placeholder="Description" name="description"></textarea>
           <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
@@ -56,14 +56,14 @@
         <form method="POST" action="/recurrences/message" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= query.id %>">
           <select name="cycle">
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly" selected>Monthly</option>
-            <option value="Yearly">Yearly</option>
+            <option value="Daily" <% if (query.cycle === 'Daily') { %>selected<% } %>>Daily</option>
+            <option value="Weekly" <% if (query.cycle === 'Weekly') { %>selected<% } %>>Weekly</option>
+            <option value="Monthly" <% if (!query.cycle || query.cycle === 'Monthly') { %>selected<% } %>>Monthly</option>
+            <option value="Yearly" <% if (query.cycle === 'Yearly') { %>selected<% } %>>Yearly</option>
           </select>
           <input type="date" name="date" placeholder="Start Date" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(0, 10) : null %>">
           <input type="time" name="time" placeholder="Start Time" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(11, 16) : null %>">
-	        <textarea placeholder="Transaction Message" name="message"><%= query.command %></textarea>
+	        <textarea placeholder="Transaction Message" name="message"><%- query.command %></textarea>
           <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
 	      </form>
@@ -73,12 +73,14 @@
         <% recurrences.forEach(recurrence => { %>
           <ul>
             <li>ID: <%= recurrence.id %></li>
-            <li><%= recurrence.cycle %> @ <%= recurrence.date %> <%= recurrence.time %> (<%= recurrence.timezone %>)</li>
+            <li><%= recurrence.cycle %> at <%= recurrence.date %> <%= recurrence.time %> (<%= recurrence.timezone %>)</li>
             <li>Command: <%- recurrence.command %></li>
-            <li><a href="/recurrences?id=<%= recurrence.id %>&cycle=<%= recurrence.cycle %>&start=<%= recurrence.datetime %>&command=<%= recurrence.command %>&image=<%= recurrence.image %>">Edit</a></li>
+            <li><a href="/recurrences?id=<%= recurrence.id %>&cycle=<%= recurrence.cycle %>&start=<%= recurrence.datetime %>&command=<%= encodeURIComponent(recurrence.command) %>&image=<%= recurrence.image %>">Edit</a></li>
             <li><a href="/recurrences/<%= recurrence.id %>">Delete</a></li>
           </ul>
-          <img src="<%= recurrence.image %>">
+					<% if (recurrence.image) { %>
+          	<img src="<%= recurrence.image %>">
+					<% } %>
         <% }) %>
       </section>
 		</main>

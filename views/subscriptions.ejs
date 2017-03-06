@@ -30,7 +30,7 @@
             <li>Customer ID: <%= subscription.customer %></li>
             <li>User ID: <%= subscription.user %></li>
             <li>Webhook: <%= subscription.webhook %></li>
-            <li><a href="/subscriptions?id=<%= subscription.id %>&webhook=<%= subscription.webhook %>">Edit</a></li>
+            <li><a href="/subscriptions?id=<%= subscription.id %>&webhook=<%= encodeURIComponent(subscription.webhook) %>">Edit</a></li>
             <li><a href="/subscriptions/<%= subscription.id %>">Delete</a></li>
           </ul>
         <% }) %>
