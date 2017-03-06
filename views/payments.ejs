@@ -15,7 +15,11 @@
       <section>
         <h2>Post Payment</h2>
         <form method="POST" action="/payments">
-          <input type="number" name="amount" placeholder="Bitcoin Amount">
+					<select name="command">
+            <option value="charge" selected>Charge</option>
+            <option value="refund">Refund</option>
+          </select>
+          <input type="number" name="amount" placeholder="Bitcoin Amount" step="0.00000001" min="0">
           <textarea placeholder="Description" name="description"></textarea>
 	        <input type="submit" value="Submit">
 	      </form>
@@ -29,17 +33,17 @@
             <li>Branch ID: <%= payment.branch %></li>
             <li>Customer ID: <%= payment.customer %></li>
             <li>User ID: <%= payment.user %></li>
-            <li>Amount: <%= payment.amount %></li>
+            <li>Amount: <%= payment.amount %> BTC</li>
             <li>Fee: <%= payment.fee %></li>
             <li>description: <%= payment.description %></li>
             <li>Status: <%= payment.status %></li>
-            <li><a href="/payments/<%= payment.id %>">Resend Code</a></li>
-            <li>
+						<% if (payment.status === 'pending') { %>
+            	<li><a href="/payments/<%= payment.id %>">Resend Code</a></li>
               <form method="POST" action="/payments/<%= payment.id %>">
-                <input type="number" name="code" placeholder="Auth Code" step="0.00000001" min="0">
+                <input type="number" name="code" placeholder="Auth Code">
       	        <input type="submit" value="Process Payment">
       	      </form>
-            </li>
+						<% } %>
           </ul>
         <% }) %>
       </section>

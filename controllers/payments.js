@@ -16,7 +16,7 @@ module.exports = (heartbank, app) => {
   });
 
   app.post('/payments', (req, res, next) => {
-    heartbank.payments(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({amount:req.body.amount, description:req.body.description})
+    heartbank.payments(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({amount:req.body.command === 'charge' ? '-' + req.body.amount : req.body.amount, description:req.body.description})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
@@ -46,7 +46,8 @@ module.exports = (heartbank, app) => {
   });
 
   app.post('/payments/:payment_id', (req, res, next) => {
-    heartbank.payments(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({payment_id:req.params.payment_id, auth_code:req.body.code})
+    console.log(req.body.code);
+    heartbank.payments(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({payment_id:req.params.payment_id, code:req.body.code})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
