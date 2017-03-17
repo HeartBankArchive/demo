@@ -4,7 +4,12 @@
 		<title>Users</title>
 		<meta charset="utf-8">
 		<style>
-
+			img {
+				height: 200px;
+			}
+			select, input, textarea {
+        display:block;
+      }
 		</style>
 	</head>
 	<body>
@@ -26,8 +31,59 @@
           <li>Currency: <%= user.currency %></li>
           <li>Balance: <%= user.wallet.BTC %> (<%= user.wallet.USD %>)</li>
           <li>Address: <%= user.wallet.address %></li>
+					<li><a href="/users/<%= cookies.user_id %>">Get New Address</a></li>
         </ul>
         <img src="<%= user.wallet.qr %>">
+				<form method="PUT" action="/users">
+					<input type="text" name="webhook" placeholder="Webhook" value="<%= user.webhook %>">
+					<input type="submit" value="Change Webhook">
+				</form>
+      </section>
+			<section>
+        <h2>Send Bitcoins</h2>
+					<form method="POST" action="/users/<%= cookies.user_id %>">
+						<input type="text" name="address" placeholder="Address">
+	          <input type="number" name="amount" placeholder="Amount" step="0.0001" min="0.0001">
+		        <textarea placeholder="Description" name="description"></textarea>
+						<input type="number" name="pin" placeholder="Pin">
+		        <input type="submit" value="Send">
+	      	</form>
+      </section>
+			<section>
+        <h2>Schedule Withdraws</h2>
+					<form method="PUT" action="/users/<%= cookies.user_id %>">
+						<select name="cycle">
+	            <option value="Daily" <% if (user.withdraw.cycle === 'Daily') { %>selected<% } %>>Daily</option>
+	            <option value="Weekly" <% if (user.withdraw.cycle === 'Weekly') { %>selected<% } %>>Weekly</option>
+	            <option value="Monthly" <% if (!user.withdraw.cycle || user.withdraw.cycle === 'Monthly') { %>selected<% } %>>Monthly</option>
+	            <option value="Yearly" <% if (user.withdraw.cycle === 'Yearly') { %>selected<% } %>>Yearly</option>
+	          </select>
+						<input type="text" name="address" placeholder="Address" value="<%= user.withdraw.address %>">
+						<input type="number" name="pin" placeholder="Pin">
+		        <input type="submit" value="Submit">
+	      	</form>
+      </section>
+			<section>
+        <h2>Verify Signed Message</h2>
+					<form method="POST" action="/users">
+          	<input type="text" name="address" placeholder="Address">
+						<input type="text" name="message" placeholder="Message">
+						<input type="text" name="signature" placeholder="Signature">
+	        	<input type="submit" value="Verify">
+	      	</form>
+      </section>
+			<section>
+        <h2>Transactions</h2>
+        <% user.transactions.forEach(transaction => { %>
+          <ul>
+            <li><%= transaction.date %></li>
+            <li>Amount: <%= transaction.amount.BTC %> BTC (<%= transaction.amount.USD %> USD)</li>
+            <li>Description: <%- transaction.description %></li>
+						<li>Status: <%= transaction.status %></li>
+						<li>Hash: <%= transaction.hash %></li>
+						<li><a href="<%= transaction.blockchain %>">Blockchain</a></li>
+          </ul>
+        <% }) %>
       </section>
 		</main>
 		<script>
