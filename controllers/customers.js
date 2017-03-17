@@ -1,7 +1,7 @@
 module.exports = (heartbank, app) => {
 
   app.get('/customers', (req, res, next) => {
-    heartbank.customers(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).get()
+    heartbank.customers(req.cookies.client_id, req.cookies.auth_token).get({customer_id:req.cookies.customer_id})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));

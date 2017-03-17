@@ -5,9 +5,9 @@ module.exports = (heartbank, app) => {
 
   app.get('/transactions', (req, res, next) => {
 
-    const branch = heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).get({customer:false, q:req.query.q, fetch:req.query.fetch, page:req.query.page, start:req.query.start, end:req.query.end, filters:{account:req.query.account === 'on', fund:req.query.fund === 'on', reserve:req.query.reserve === 'on'}});
+    const branch = heartbank.transactions(req.cookies.client_id, req.cookies.auth_token).get({branch_id:req.cookies.branch_id, customer:false, q:req.query.q, fetch:req.query.fetch, page:req.query.page, start:req.query.start, end:req.query.end, filters:{account:req.query.account === 'on', fund:req.query.fund === 'on', reserve:req.query.reserve === 'on'}});
 
-    const customer = heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).get({customer:true, q:req.query.q, fetch:req.query.fetch, page:req.query.page, start:req.query.start, end:req.query.end, filters:{account:req.query.account === 'on', fund:req.query.fund === 'on', reserve:req.query.reserve === 'on'}});
+    const customer = heartbank.transactions(req.cookies.client_id, req.cookies.auth_token).get({branch_id:req.cookies.branch_id, customer_id:req.cookies.customer_id, customer:true, q:req.query.q, fetch:req.query.fetch, page:req.query.page, start:req.query.start, end:req.query.end, filters:{account:req.query.account === 'on', fund:req.query.fund === 'on', reserve:req.query.reserve === 'on'}});
 
     Promise.all([branch, customer])
     .then(data => {
@@ -27,7 +27,7 @@ module.exports = (heartbank, app) => {
   });
 
   app.post('/transactions/transaction', (req, res, next) => {
-    heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({command:req.body.command, to:req.body.to, amount:req.body.amount, currency:req.body.currency, anonymity:req.body.anonymity === 'on', description:req.body.description, media:req.file ? fs.readFileSync(path.join(__dirname, '..', req.file.path)) : null})
+    heartbank.transactions(req.cookies.client_id, req.cookies.auth_token).post({command:req.body.command, to:req.body.to, amount:req.body.amount, currency:req.body.currency, anonymity:req.body.anonymity === 'on', description:req.body.description, media:req.file ? fs.readFileSync(path.join(__dirname, '..', req.file.path)) : null})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
@@ -43,7 +43,7 @@ module.exports = (heartbank, app) => {
   });
 
   app.post('/transactions/message', (req, res, next) => {
-    heartbank.transactions(req.cookies.client_id, req.cookies.auth_token, [req.cookies.branch_id, req.cookies.customer_id, req.cookies.user_id]).post({message:req.body.message, media:req.file ? fs.readFileSync(path.join(__dirname, '..', req.file.path)) : null})
+    heartbank.transactions(req.cookies.client_id, req.cookies.auth_token).post({message:req.body.message, media:req.file ? fs.readFileSync(path.join(__dirname, '..', req.file.path)) : null})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
