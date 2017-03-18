@@ -53,7 +53,7 @@
       </section>
       <section>
         <h2>Post via Message: <%= query.id %></h2>
-        <form method="POST" action="/recurrences/message" enctype="multipart/form-data">
+        <form id="message" method="POST" action="/recurrences/message" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= query.id %>">
           <select name="cycle">
             <option value="Daily" <% if (query.cycle === 'Daily') { %>selected<% } %>>Daily</option>
@@ -64,7 +64,8 @@
           <input type="date" name="date" placeholder="Start Date" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(0, 10) : null %>">
           <input type="time" name="time" placeholder="Start Time" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(11, 16) : null %>">
 	        <textarea placeholder="Transaction Message" name="message"><%- query.command %></textarea>
-					<input type="button" value="Check">
+					<input type="button" value="Check" onclick="check()">
+					<span id="check"></span>
           <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
 	      </form>
@@ -86,7 +87,18 @@
       </section>
 		</main>
 		<script>
-
+			const check = () => {
+				fetch('/customers', {credentials:'same-origin', method:'post', body:new FormData(document.getElementById('message'))})
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					document.getElementById('check').innerHTML = data.kiitos;
+				})
+				.catch(error => {
+					console.error(error);
+				});
+			}
     </script>
 	</body>
 </html>

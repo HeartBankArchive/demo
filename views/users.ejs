@@ -60,15 +60,18 @@
 	          </select>
 						<input type="text" name="address" placeholder="Address" value="<%= user.withdraw.address %>">
 						<input type="number" name="pin" placeholder="Pin" min="0">
-		        <input type="submit" value="Submit">
+		        <input type="submit" value="Change">
 	      	</form>
       </section>
 			<section>
         <h2>Verify Signed Message</h2>
-      	<input type="text" name="address" placeholder="Address">
-				<textarea placeholder="Message" name="message"></textarea>
-				<input type="text" name="signature" placeholder="Signature">
-      	<input type="button" value="Verify">
+				<form id="verify">
+      		<input type="text" name="address" placeholder="Address">
+					<textarea placeholder="Message" name="message"></textarea>
+					<input type="text" name="signature" placeholder="Signature">
+	      	<input type="button" value="Verify" onclick="verify()">
+					<span id="result"></span>
+				</form>
       </section>
 			<section>
         <h2>Transactions</h2>
@@ -85,7 +88,18 @@
       </section>
 		</main>
 		<script>
-
+			const verify = () => {
+				fetch('/users', {credentials:'same-origin', method:'post', body:new FormData(document.getElementById('verify'))})
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					document.getElementById('result').innerHTML = data.result;
+				})
+				.catch(error => {
+					console.error(error);
+				});
+			}
     </script>
 	</body>
 </html>
