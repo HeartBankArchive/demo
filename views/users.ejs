@@ -31,7 +31,7 @@
           <li>Currency: <%= user.currency %></li>
           <li>Balance: <%= user.wallet.BTC %> (<%= user.wallet.USD %>)</li>
           <li>Address: <%= user.wallet.address %></li>
-					<li><a href="/users/<%= cookies.user_id %>">Get New Address</a></li>
+					<li><a href="/users/<%= user.id %>">Get New Address</a></li>
         </ul>
         <img src="<%= user.wallet.qr %>">
 				<form method="POST" action="/put">
@@ -41,7 +41,7 @@
       </section>
 			<section>
         <h2>Send Bitcoins</h2>
-					<form method="POST" action="/users/<%= cookies.user_id %>">
+					<form method="POST" action="/users/<%= user.id %>">
 						<input type="text" name="address" placeholder="Address">
 	          <input type="number" name="amount" placeholder="Amount" step="0.0001" min="0.0001">
 		        <textarea placeholder="Description" name="description"></textarea>
@@ -51,7 +51,7 @@
       </section>
 			<section>
         <h2>Schedule Withdraws</h2>
-					<form method="POST" action="/put/<%= cookies.user_id %>">
+					<form method="POST" action="/put/<%= user.id %>">
 						<select name="cycle">
 							<option value="daily" <% if (user.withdraw.cycle === 'daily') { %>selected<% } %>>Daily</option>
 	            <option value="weekly" <% if (user.withdraw.cycle === 'weekly') { %>selected<% } %>>Weekly</option>

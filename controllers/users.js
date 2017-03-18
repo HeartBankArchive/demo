@@ -5,7 +5,7 @@ module.exports = (heartbank, app) => {
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
-        res.render('users', {cookies:req.cookies, user:data.user});
+        res.render('users', {user:data.user});
       } else {
         res.send(JSON.stringify(data));
       }

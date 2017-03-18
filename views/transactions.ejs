@@ -109,7 +109,9 @@
               <li>Balance: <%= to.balance %></li>
             </ul>
           <% }) %>
-          <img src="<%= transaction.image %>">
+					<% if (transaction.image) { %>
+          	<img src="<%= transaction.image %>" height="100">
+					<% } %>
         <% }) %>
       </section>
 		</main>
