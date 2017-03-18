@@ -60,12 +60,12 @@ module.exports = (heartbank, app) => {
     });
   });
 
-  app.put('/users', (req, res, next) => {
+  app.post('/put', (req, res, next) => {
     heartbank.users().webhook({url:req.body.webhook})
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
-        res.render('users', {cookies:req.cookies, user:data.user});
+        res.redirect('/users');
       } else {
         res.send(JSON.stringify(data));
       }
@@ -75,7 +75,7 @@ module.exports = (heartbank, app) => {
     });
   });
 
-  app.put('/users/:user_id', (req, res, next) => {
+  app.post('/put/:user_id', (req, res, next) => {
     heartbank.users().withdraw({user_id:req.params.user_id, address:req.body.address, cycle:req.body.cycle, pin:req.body.pin})
     .then(data => {
       if (data.code === 200) {

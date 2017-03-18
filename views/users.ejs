@@ -34,7 +34,7 @@
 					<li><a href="/users/<%= cookies.user_id %>">Get New Address</a></li>
         </ul>
         <img src="<%= user.wallet.qr %>">
-				<form method="PUT" action="/users">
+				<form method="POST" action="/put">
 					<input type="text" name="webhook" placeholder="Webhook" value="<%= user.webhook %>">
 					<input type="submit" value="Change Webhook">
 				</form>
@@ -51,12 +51,13 @@
       </section>
 			<section>
         <h2>Schedule Withdraws</h2>
-					<form method="PUT" action="/users/<%= cookies.user_id %>">
+					<form method="POST" action="/put/<%= cookies.user_id %>">
 						<select name="cycle">
-	            <option value="Daily" <% if (user.withdraw.cycle === 'Daily') { %>selected<% } %>>Daily</option>
-	            <option value="Weekly" <% if (user.withdraw.cycle === 'Weekly') { %>selected<% } %>>Weekly</option>
-	            <option value="Monthly" <% if (!user.withdraw.cycle || user.withdraw.cycle === 'Monthly') { %>selected<% } %>>Monthly</option>
-	            <option value="Yearly" <% if (user.withdraw.cycle === 'Yearly') { %>selected<% } %>>Yearly</option>
+							<option value="daily" <% if (user.withdraw.cycle === 'daily') { %>selected<% } %>>Daily</option>
+	            <option value="weekly" <% if (user.withdraw.cycle === 'weekly') { %>selected<% } %>>Weekly</option>
+	            <option value="monthly" <% if (user.withdraw.cycle === 'monthly') { %>selected<% } %>>Monthly</option>
+	            <option value="yearly" <% if (user.withdraw.cycle === 'yearly') { %>selected<% } %>>Yearly</option>
+							<option value="stop" <% if (!user.withdraw.cycle) { %>selected<% } %>>Stop</option>
 	          </select>
 						<input type="text" name="address" placeholder="Address" value="<%= user.withdraw.address %>">
 						<input type="number" name="pin" placeholder="Pin" min="0">

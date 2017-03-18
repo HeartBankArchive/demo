@@ -1,7 +1,7 @@
 {
   "name": "heartbankapp",
   "version": "0.1.0",
-  "description": "HeartBank Boilerplate App",
+  "description": "HeartBank Demo App",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -14,7 +14,7 @@
   },
   "keywords": [
     "heartbank",
-    "boilerplate",
+    "demo",
     "express"
   ],
   "author": "Thon Ly",
