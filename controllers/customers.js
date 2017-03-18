@@ -15,4 +15,19 @@ module.exports = (heartbank, app) => {
     });
   });
 
+  app.post('/customers', (req, res, next) => {
+    heartbank.customers(req.cookies.client_id, req.cookies.auth_token).get({customer_id:req.cookies.customer_id})
+    .then(data => {
+      if (data.code === 200) {
+        //console.log(JSON.stringify(data));
+        res.render('customers', {customer:data.customer});
+      } else {
+        res.send(JSON.stringify(data));
+      }
+    })
+    .catch(error => {
+      next(error);
+    });
+  });
+
 }

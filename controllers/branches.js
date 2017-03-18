@@ -5,7 +5,22 @@ module.exports = (heartbank, app) => {
     .then(data => {
       if (data.code === 200) {
         //console.log(JSON.stringify(data));
-        res.render('branches', {branch:data.branch});
+        res.render('branches', {cookies:req.cookies, branch:data.branch});
+      } else {
+        res.send(JSON.stringify(data));
+      }
+    })
+    .catch(error => {
+      next(error);
+    });
+  });
+
+  app.post('/branches', (req, res, next) => {
+    heartbank.branches(req.cookies.client_id, req.cookies.auth_token).put({branch_id:req.params.branch_id})
+    .then(data => {
+      if (data.code === 200) {
+        //console.log(JSON.stringify(data));
+        res.render('branches', {cookies:req.cookies, branch:data.branch});
       } else {
         res.send(JSON.stringify(data));
       }

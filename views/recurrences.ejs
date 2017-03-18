@@ -64,6 +64,7 @@
           <input type="date" name="date" placeholder="Start Date" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(0, 10) : null %>">
           <input type="time" name="time" placeholder="Start Time" value="<%= query.start ? (new Date(parseInt(query.start))).toISOString().substring(11, 16) : null %>">
 	        <textarea placeholder="Transaction Message" name="message"><%- query.command %></textarea>
+					<input type="button" value="Check">
           <input type="file" name="media" size="1">
 	        <input type="submit" value="Submit">
 	      </form>

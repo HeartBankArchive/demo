@@ -45,7 +45,7 @@
 						<input type="text" name="address" placeholder="Address">
 	          <input type="number" name="amount" placeholder="Amount" step="0.0001" min="0.0001">
 		        <textarea placeholder="Description" name="description"></textarea>
-						<input type="number" name="pin" placeholder="Pin">
+						<input type="number" name="pin" placeholder="Pin" min="0">
 		        <input type="submit" value="Send">
 	      	</form>
       </section>
@@ -59,18 +59,16 @@
 	            <option value="Yearly" <% if (user.withdraw.cycle === 'Yearly') { %>selected<% } %>>Yearly</option>
 	          </select>
 						<input type="text" name="address" placeholder="Address" value="<%= user.withdraw.address %>">
-						<input type="number" name="pin" placeholder="Pin">
+						<input type="number" name="pin" placeholder="Pin" min="0">
 		        <input type="submit" value="Submit">
 	      	</form>
       </section>
 			<section>
         <h2>Verify Signed Message</h2>
-					<form method="POST" action="/users">
-          	<input type="text" name="address" placeholder="Address">
-						<input type="text" name="message" placeholder="Message">
-						<input type="text" name="signature" placeholder="Signature">
-	        	<input type="submit" value="Verify">
-	      	</form>
+      	<input type="text" name="address" placeholder="Address">
+				<textarea placeholder="Message" name="message"></textarea>
+				<input type="text" name="signature" placeholder="Signature">
+      	<input type="button" value="Verify">
       </section>
 			<section>
         <h2>Transactions</h2>

@@ -4,7 +4,9 @@
 		<title>Branches</title>
 		<meta charset="utf-8">
 		<style>
-
+			select, input {
+				display:block;
+			}
 		</style>
 	</head>
 	<body>
@@ -23,6 +25,20 @@
           <li>Status: <%= branch.status %></li>
         </ul>
       </section>
+			<h2>Interest Rates</h2>
+				<ul>
+					<li>Savings: <%= branch.rate.savings*100 %>&#37;</li>
+					<li>Loans: <%= branch.rate.loans*100 %>&#37;</li>
+				</ul>
+				<form method="POST" action="/branches">
+					<select name="interest">
+						<option value="savings" selected>Savings</option>
+						<option value="loans">Loans</option>
+					</select>
+					<input type="number" name="rate" placeholder="Percentage Rate" min="0">
+					<input type="submit" value="Change">
+				</form>
+		</section>
       <section>
         <h2>Customers</h2>
         <% branch.customers.forEach(customer => { %>
