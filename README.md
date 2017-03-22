@@ -1,2 +1,1 @@
-# boilerplate
-Express App
+`npm install heartbank-demo`

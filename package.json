@@ -1,5 +1,5 @@
 {
-  "name": "heartbankapp",
+  "name": "heartbank-demo",
   "version": "0.2.0",
   "description": "HeartBank Demo App",
   "main": "server.js",

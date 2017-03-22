@@ -15,8 +15,9 @@ app.use(multer({dest:'images/'}).single('media'));
 app.use(cookieParser());
 
 require('./controllers/index')(app);
-require('./controllers/clients')(heartbank, app);
+require('./controllers/kiitos')(app);
 require('./controllers/users')(heartbank, app);
+require('./controllers/clients')(heartbank, app);
 require('./controllers/branches')(heartbank, app);
 require('./controllers/customers')(heartbank, app);
 require('./controllers/transactions')(heartbank, app);
