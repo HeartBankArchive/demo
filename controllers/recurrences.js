@@ -4,11 +4,15 @@ const path = require('path');
 module.exports = (heartbank, app) => {
 
   app.get('/recurrences', (req, res, next) => {
-    heartbank.recurrences(req.cookies.client_id, req.cookies.auth_token).get()
+
+    const members = heartbank.branches(req.cookies.client_id, req.cookies.auth_token).get({branch_id:req.cookies.branch_id});
+    const recurrences = heartbank.recurrences(req.cookies.client_id, req.cookies.auth_token).get();
+
+    Promise.all([members, recurrences])
     .then(data => {
-      if (data.code === 200) {
+      if (data[0].code === 200 && data[1].code === 200) {
         //console.log(JSON.stringify(data));
-        res.render('recurrences', {query:req.query,recurrences:data.recurrences});
+        res.render('recurrences', {query:req.query, members:data[0].branch.customers, recurrences:data[1].recurrences});
       } else {
         res.send(JSON.stringify(data));
       }
@@ -16,6 +20,7 @@ module.exports = (heartbank, app) => {
     .catch(error => {
       next(error);
     });
+
   });
 
   app.post('/recurrences/transaction', (req, res, next) => {

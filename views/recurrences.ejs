@@ -42,7 +42,11 @@
             <option value="reward">Reward</option>
             <option value="donate">Donate</option>
           </select>
-          <input type="text" name="to" placeholder="To">
+					<select name="to">
+						<% members.forEach(member => { %>
+							<option value="<%= member.username %>"><%= member.username %></option>
+						<% }) %>
+					</select>
           Anonymity: <input type="checkbox" name="anonymity">
           <input type="text" name="currency" value="USD">
           <input type="number" name="amount" placeholder="Amount" step="0.01" min="0">
