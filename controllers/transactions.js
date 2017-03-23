@@ -15,8 +15,8 @@ module.exports = (heartbank, app) => {
     .then(data => {
       if (data[0].code === 200 && (data[1].code === 200 || data[2].code === 200)) {
         //console.log(JSON.stringify(data));
-        const branches = data[1].code === 200 ? data[1].transactions : [];
-        const customers = data[2].code === 200 ? data[2].transactions : [];
+        const branches = data[1].code === 200 ? data[1].results : [];
+        const customers = data[2].code === 200 ? data[2].results : [];
         res.render('transactions', {query:req.query, members:data[0].branch.customers, branches, customers});
       } else {
         res.send(JSON.stringify(data));

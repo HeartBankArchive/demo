@@ -66,9 +66,18 @@
 	        <input type="submit" value="Search">
 	      </form>
       </section>
+			<section>
+        <h2>Statements</h2>
+        <ul>
+          <li>Volumes: <%= customers.statement.volumes %> / <%= branches.statement.volumes %></li>
+          <li>Transactions: <%= customers.statement.transactions %> / <%= branches.statement.transactions %></li>
+          <li>Earnings: <%= customers.statement.earnings %> / <%= branches.statement.earnings %></li>
+          <li>Spendings: <%= customers.statement.spendings %> / <%= branches.statement.spendings %></li>
+        </ul>
+      </section>
       <section>
         <h2>Customer</h2>
-        <% customers.forEach(transaction => { %>
+        <% customers.transactions.forEach(transaction => { %>
           <ul>
             <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
             <li>Fund: <%= transaction.bank.fund %></li>
@@ -94,7 +103,7 @@
       </section>
       <section>
         <h2>Branch</h2>
-        <% branches.forEach(transaction => { %>
+        <% branches.transactions.forEach(transaction => { %>
           <ul>
             <li><%= transaction.date %> <%= transaction.time %> (<%= transaction.timezone %>)</li>
             <li>Fund: <%= transaction.bank.fund %></li>
